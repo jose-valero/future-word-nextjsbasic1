@@ -1,0 +1,1 @@
+export { SanitazeHTML } from './SanitazeHTML';
