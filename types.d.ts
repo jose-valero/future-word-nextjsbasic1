@@ -34,8 +34,6 @@ interface ShopifyProduct {
   admin_graphql_api_id: string;
   variants: Variant[];
   options: Option[];
-  // variants: object[];
-  // options: object[];
   images: ShopifyProductImage[];
   image: string;
 }
@@ -45,11 +43,6 @@ interface ProductType extends ShopifyProduct {
   price: number;
   quantity: number;
   gql_id: string;
-  // id: string;
-  // title: string;
-  // image: string;
-  // handle: string;
-  // tags: string;
 }
 
 interface CollectionsProps {
@@ -103,3 +96,40 @@ type CartItem = {
   image: string;
   merchandiseId?: string;
 };
+
+interface OrdersDataProps {
+  cancelReason: string | null;
+  canceledAt: string | null;
+  currencyCode: string;
+  customerLocale: string;
+  customerUrl: string | null;
+  edited: boolean;
+  email: string;
+  financialStatus: string;
+  fulfillmentStatus: string | null;
+  id: string;
+  name: string;
+  orderNumber: number;
+  phone: string | null;
+  processedAt: string; // o Date, depende
+  statusUrl: string;
+  lineItems: {
+    edges: LineItemsEdge[];
+  };
+}
+
+interface LineItemsEdge {
+  cursor: string;
+  node: OrdersNodeProps;
+}
+
+interface OrdersNodeProps {
+  currentQuantity: number;
+  quantity: number;
+  title: string;
+}
+
+interface OrdersResponse {
+  totalOrders?: number;
+  orders?: OrderNode[];
+}

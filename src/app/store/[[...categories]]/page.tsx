@@ -2,15 +2,14 @@ import { ProductsWrapper } from 'app/components/Store/ProductsWrapper';
 import { getCollectionProducts, getCollections } from 'app/services/shopify/collections';
 import { getProducts } from 'app/services/shopify/products';
 
+export const dynamic = 'force-dynamic';
 interface CategoryProps {
-  params: {
-    categories: string[];
-  };
-  searchParams?: string;
+  params: Promise<{ categories: string[] }>;
+  // searchParams?: string;
 }
 
-export default async function Category(props: CategoryProps) {
-  const { categories } = await props.params;
+export default async function Category({ params }: CategoryProps) {
+  const { categories } = await params;
   let products = [];
   const collections = await getCollections();
 
